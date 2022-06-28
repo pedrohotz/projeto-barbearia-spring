@@ -5,10 +5,9 @@ import com.example.barbearia.models.Cliente;
 import com.example.barbearia.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 @RequestMapping("/cliente")
@@ -21,4 +20,15 @@ public class ClienteResource {
             return ResponseEntity.ok(clienteService.cadastro(cadastroCliente));
     }
 
+    @GetMapping("/listar-maiores")
+    public ResponseEntity <List<Cliente>> listarMaiores(){
+        List clientes = clienteService.listarMaiores();
+
+        if(clientes == null){
+            return ResponseEntity.notFound().build();
+        }
+        else {
+            return ResponseEntity.ok().body(clientes);
+        }
+    }
 }
