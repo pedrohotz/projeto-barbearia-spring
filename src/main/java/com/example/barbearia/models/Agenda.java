@@ -4,6 +4,7 @@ package com.example.barbearia.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -23,8 +24,8 @@ public class Agenda extends Base{
     @ManyToOne()
     private Cliente cliente;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataAgendamento;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate data;
 
     @ManyToOne()
     private Equipe equipe;

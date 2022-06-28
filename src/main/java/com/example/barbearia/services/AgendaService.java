@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
+import java.time.LocalDate;
+import java.util.List;
+
 
 @Service
 public class AgendaService {
@@ -34,6 +37,7 @@ public class AgendaService {
         novaAgenda.setTipo(tipo);
         novaAgenda.setCliente(clienteREPO.findById(agenda.getClientId()));
         novaAgenda.setEquipe(equipeREPO.findById(agenda.getEquipeId()));
+        novaAgenda.setData(agenda.getData());
         agendaREPO.save(novaAgenda);
 
         return novaAgenda;
@@ -41,5 +45,13 @@ public class AgendaService {
 
     public Agenda listarPorId(Integer id){
         return  agendaREPO.findById(id);
+    }
+
+    public List<Agenda> listarPorData(LocalDate data){
+        List<Agenda> agendas = agendaREPO.findByData(data);
+        if(agendas.isEmpty()){
+            return  null;
+        }
+        return agendas;
     }
 }

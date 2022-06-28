@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 
@@ -15,15 +17,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class AgendamentoDTO {
 
+    @NotNull
     private Integer clientId;
-
+    @NotNull
     private Integer tipoId;
-
+    @NotNull
     private String descricao;
-
+    @NotNull
     private Integer equipeId;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataAgendamento;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate data;
 
 }
